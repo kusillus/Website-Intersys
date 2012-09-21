@@ -27,6 +27,11 @@ text-shadow: 1px 1px 5px black;
 body{
 	background-color:black; 
 }
+#forkme {
+position: absolute;
+z-index: 3;
+right: 1px;
+}
 .jms-slideshow {
 	position: relative;
 	height: 430px;
@@ -190,8 +195,8 @@ right: -10%;
 }*/
 header {
 	height: 20px;
-	margin: 0 auto;
-    max-width: 1000px;
+max-width: 1000px;
+margin: 0 auto;
 }
 header nav{
 	display: inline-block;
@@ -3896,17 +3901,18 @@ background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%); /* 
 	border: 1px solid black;
 	border-radius: 10px;
 }
-.login form input[type="text"],.login form input[type="password"],.login form input[type="button"]{
+.login form input[type="text"],.login form input[type="password"],.login form input[type="submit"]{
 	display: block;
 	width: 90%;
 	padding: 1%;
 	margin: 0 auto;
 	border-radius: 5px;
+	border: 1px solid rgba(0,0,0,.4);
 }
 /*.login form input[type="button"] span{
 	background: url(../images/icons/login.png) right no-repeat;
 }*/
-.login form input[type="button"]{
+.login form input[type="submit"]{
 	margin-top: 4%;
 	margin-bottom: 4%;
 	width: 60%;
@@ -3925,7 +3931,7 @@ background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%); /* 
   -moz-box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
-.login form input[type="button"]:hover {
+.login form input[type="submit"]:hover {
 	cursor: pointer;
   background: #b2d840;
   background: -webkit-gradient(linear, left top, left bottom, from(#b2d840), to(#a8ce36));
@@ -3933,7 +3939,7 @@ background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%); /* 
   background-image: -moz-linear-gradient(top, #b2d840, #a8ce36);
   background-image: -moz-gradient(top, #b2d840, #a8ce36);
 }
-.login form input[type="button"]:active {
+.login form input[type="submit"]:active {
   border-bottom-width: 1px !important;
   top: 2px;
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
@@ -3948,7 +3954,7 @@ background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%); /* 
   background-image: -moz-linear-gradient(top, #a8ce36, #b2d840);
   background-image: -moz-gradient(top, #a8ce36, #b2d840);
 }
-.login form input[type="button"]:hover {
+.login form input[type="submit"]:hover {
 	cursor: pointer;
   background: #e8c745;
   background: -webkit-gradient(linear, left top, left bottom, from(#e8c745), to(#debd3b));
@@ -3956,7 +3962,7 @@ background: linear-gradient(to bottom, #fefefd 0%,#dce3c4 42%,#aebf76 100%); /* 
   background-image: -moz-linear-gradient(top, #e8c745, #debd3b);
   background-image: -moz-gradient(top, #e8c745, #debd3b);
 }
-.login form input[type="button"]:active {
+.login form input[type="submit"]:active {
   background: #debd3b;
   background: -webkit-gradient(linear, left top, left bottom, from(#debd3b), to(#e8c745));
   background: -webkit-linear-gradient(#debd3b, #e8c745);
@@ -4097,4 +4103,7 @@ box-shadow:
 	z-index: 99999;
 	color: white;
 	text-align: center;
+}
+.error{
+	color: red;
 }

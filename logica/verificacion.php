@@ -17,16 +17,34 @@
 						        $resp = recaptcha_check_answer ($privatekey,$_SERVER["REMOTE_ADDR"],$_POST["recaptcha_challenge_field"],$_POST["recaptcha_response_field"]);
 
 						        if ($resp->is_valid) {
-						        		$sql="insert into usuario values ('null','".$_POST["rusuario"]."','".$_POST["rmail"]."','".$_POST["rorg"]."','".$_POST["rcontrasena"]."' );";
-										//echo $sql;
 						        		$ocado=new cado;
-										/*$sql="insert into usuario ('null','".$_POST["rusuario"]."','".$_POST["rmail"]."','".$_POST["rorg"]."','".$_POST["rcontrasena"]."' );";
-										echo $sql;*/
-										$res=$ocado->ejecutar($sql);
-						        		if( $res ){
-						        			echo "<span>Su registro ha sido exitoso :D</span> ";
+						        		
+				//Consultamos para ver si el nombre de usuario esta disponble   SELECT * FROM  `usuario` WHERE  `usuario` LIKE  'skeiter9' or  `email` LIKE  'skeiter_9@hsdfs.com'
+										$verificausuario="select usuario from usuario where usuario like '".$_POST["rusuario"]."'";
+										$consulta=$ocado->ejecutar($verificausuario);
+						        		if( $consulta ){
+						        			$existe = mysql_num_rows($consulta);
+						        			//echo $consulta;
+						        			if($existe>=1){
+						        				echo "Lo sentimos el nombre de Usuario solicitado ya esta en Uso " ;
+						        			}else{
+						        				$verificacorreo="select usuario from usuario where email like '".$_POST["rmail"]."'";
+						        				$consulta2=$ocado->ejecutar($verificacorreo);
+						        				$existecorreo=mysql_num_rows($consulta2);
+						        				if($existecorreo>=1){
+						        					echo " El <span class='error'>correo</span> Ingresado esta Siendo usado por otro usuario " ;
+						        				}else{
+						        					$sql="insert into usuario values ('null','".$_POST["rusuario"]."','".$_POST["rmail"]."','".$_POST["rorg"]."','".$_POST["rcontrasena"]."' );";
+						        					$res=$ocado->ejecutar($sql);
+													if($res){
+														echo "bn";
+													}else{
+														echo "Ocurrio un Error en el ultimo paso";
+													}
+						        				}
+						        			}
 						        		}else{
-											echo "No se ha podido registrar";
+											echo "No se ha podido registrar - error de Conexion";
 						        		}
 
 						        } else {
@@ -39,17 +57,5 @@
 						}else{
 							echo "Debe Ingresar las palabras :p";
 						}
-						
 
-
-						/*$totEmp = mysql_num_rows($resEmp);
-Mostrando los resultados.
-Finalmente mostramos los resultados obtenidos de nuestra consulta, para ello extraemos cada resultado utilizando la función mysql_fetch_assoc la cual devuelve una matriz asociativa utilizando los nombres de los campos de la tabla.
-if ($totEmp> 0) {
-   while ($rowEmp = mysql_fetch_assoc($resEmp)) {
-      echo "<strong>".$rowEmp['nombre']."</strong><br>";
-      echo "Direccion: ".$rowEmp['direccion']."<br>";
-      echo "Telefono: ".$rowEmp['telefono']."<br><br>";
-   }
-}*/
  ?>

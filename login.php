@@ -18,12 +18,12 @@
 	<section id="formularios">
 		<div class="login">
 			<h2>Login</h2>
-			<form action="">
+			<form id="formlogin">
 				<label for="text">Usuario</label>
-				<input type="text" required id="lUsuario"/>
+				<input type="text" required id="lusuario"/>
 				<label for="">Contraseña</label>
-				<input type="password" required id="lContrasena"/>
-				<input type="button" value="Login">
+				<input type="password" required id="lcontrasena"/>
+				<input type="submit" value="Login">
 			</form>
 		</div>
 		<div class="registro">
@@ -64,11 +64,6 @@
 				<input type="submit" value="Registro" id="formcaptcha" />
 			</form>
 			<img src="images/loader.gif" alt="Cargando" class="cargando" />
-			<!--<form>-->
-				
-				<!--<button id="formcaptcha" >fgsdhfhfsdhfd</button>
-    			<input type="button" value="submit" id="formcaptcha" />
-			</form>-->
 		</div>
 	</section>
 	<script type="text/javascript">
@@ -81,6 +76,31 @@
 				$(".cargando").css({"display":"none"});
 				event.preventDefault();
 			})
+			$("#formlogin").on("submit",function(event){ 
+				validarform2();
+				event.preventDefault();
+			})
+
+			function validarform2(){
+				var rusuario=$("#lusuario").val(),
+				contrasenia=$("#lcontrasena").val();
+
+				if(rcontrasena1!=rcontrasena2){
+					$("#rpta").html("las <span>contraseñas</span> no Coinciden reviselas");
+				}else{
+					$.ajax({
+						type: "POST",
+						url:"logica/verificacion.php",
+						data:"recaptcha_response_field="+$("#recaptcha_response_field").val()+"&recaptcha_challenge_field="+$("#recaptcha_challenge_field").val()+
+						"&rusuario="+rusuario+"&rmail="+remail+"&rcontrasena="+rcontrasena1+"&rorg="+rorg,
+						success:function(msg){
+			         		$("#rpta").html(msg);
+			            }
+		        	})
+				}
+				
+			}
+
 			function validarform(){
 				var rusuario=$("#nuevousuario").val(),
 				remail=$("#nuevoemail").val(),
@@ -96,7 +116,13 @@
 						data:"recaptcha_response_field="+$("#recaptcha_response_field").val()+"&recaptcha_challenge_field="+$("#recaptcha_challenge_field").val()+
 						"&rusuario="+rusuario+"&rmail="+remail+"&rcontrasena="+rcontrasena1+"&rorg="+rorg,
 						success:function(msg){
-			         		$("#rpta").html(msg);
+							if(msg=="bn"){
+								$('#formcaptcha').attr('disabled','disabled');
+								$('#formcaptcha').css({'display':'none'});
+								$("#rpta").html("<span>Su registro ha sido exitoso :D y puede Loguearse</span>" );
+							}else{
+								$("#rpta").html(msg);
+							}
 			            }
 		        	})
 				}
