@@ -3,7 +3,9 @@
 
 Este es el template ha usar en el website de la edición 2012 de Intersys-UNPRG
 
-/************************************Tegnologías usadas****************************************/
+/*******************Tegnologías usadas*****************/
 <h3>Html5</h3>
 <h3>css3</h3>
 <h3>jquery</h3>
+<h3>ajax</h3>
+<h3>mysql</h3>
